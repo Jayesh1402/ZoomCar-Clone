@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import PrivateRoute from "../Components/PrivateRoute";
 import BookingsPage from "../Pages/BookingsPage";
 import HomePage from "../Pages/HomePage";
@@ -6,9 +6,11 @@ import LoginPage from "../Pages/LoginPage";
 import SignUpPage from "../Pages/SignUpPage";
 import CarPage from "../Pages/CarPage";
 import ZmsPage from "../Pages/ZmsPage";
+import Footer from "../Components/Footer";
 
 export default function AllRoutes() {
   return (
+    <BrowserRouter>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/car" element={<CarPage />} />
@@ -24,5 +26,7 @@ export default function AllRoutes() {
         }
       />
     </Routes>
+    <Footer/>
+    </BrowserRouter>
   );
 }
