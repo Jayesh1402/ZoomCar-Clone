@@ -4,11 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextProvider";
 
 const initialState = {
+  username:"",
   email: "",
-  password: "",
+  password: ""
 };
 
 // actions
+const usernameAction = (username) => {
+  return {
+    type: "username",
+    payload: username,
+  };
+};
 const emailAction = (email) => {
   return {
     type: "email",
@@ -25,6 +32,8 @@ const passwordAction = (password) => {
 // reducer function
 const reducer = (state, action) => {
   switch (action.type) {
+    case "username":
+      return { ...state, username: action.payload };
     case "email":
       return { ...state, email: action.payload };
     case "password":
@@ -57,6 +66,16 @@ export default function Register() {
           registerUser(state);
         }}
       >
+      <Input
+          py="5"
+          size="sm"
+          placeholder="Username"
+          type="username"
+          value={state.username}
+          onChange={(e) => dispatch(usernameAction(e.target.value))}
+          marginBottom="3%"
+          borderRadius="0.5rem"
+        />
         <Input
           py="5"
           size="sm"
