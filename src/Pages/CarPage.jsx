@@ -4,6 +4,7 @@ import { GoPrimitiveDot } from "react-icons/go";
 import { BsArrowRight } from "react-icons/bs";
 import SortAndFilters from "../Components/SortAndFilters";
 import CarCard from "../Components/CarCard";
+import DateTimePicker from "../Components/DateTimePicker";
 import Navbar from "../Components/Navbar";
 import axios from "axios";
 import SmallScreenCarCard from "../Components/SmallScreenCarCard";
@@ -298,7 +299,8 @@ export default function CarPage() {
                   <Text fontSize="10px">START DATE/TIME</Text>
                   <Text fontSize={{"sm":"9px","md":"10px","lg":"12px"}} fontWeight="bold">
                     {/* 1 Oct, 2022 02:00 PM{" "} */}
-                    {today}
+                    <DateTimePicker />
+                    {/* {today} */}
                   </Text>
                 </Box>
                 <Box>
@@ -308,7 +310,8 @@ export default function CarPage() {
                   <Text fontSize="10px">END DATE/TIME</Text>
                   <Text fontSize={{"sm":"9px","md":"10px","lg":"12px"}} fontWeight="bold">
                     {/* 1 Oct, 2022 10:00 PM{" "} */}
-                    {end.toUTCString()}
+                    <DateTimePicker />
+                    {/* {end.toUTCString()} */}
                   </Text>
                 </Box>
               </Flex>
