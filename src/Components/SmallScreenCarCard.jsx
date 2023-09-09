@@ -2,7 +2,8 @@ import { Box, Button, Img, Text } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { AuthContext } from "../Context/AuthContextProvider";
-
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 export default function SmallScreenCarCard({
   image,
   name,
@@ -32,7 +33,7 @@ export default function SmallScreenCarCard({
     discount_price: discount_price,
     original_price: original_price,
   };
-
+  const navigate = useNavigate();
   const { isAuth } = useContext(AuthContext);
   const LoggedInStatusLS = localStorage.getItem("isLoggedIn");
   return (
@@ -84,9 +85,31 @@ export default function SmallScreenCarCard({
             fontWeight="medium"
             onClick={() => {
               if (isAuth && LoggedInStatusLS) {
-                addToBooking(carObj);
-              } else {
-                alert("You need to login first");
+                // addToBooking({ ...carObj });
+                Swal.fire({
+                  title: 'Do you want to book a car?',
+                  showDenyButton: true,
+                  // showCancelButton: true,
+                  confirmButtonText: 'Book now',
+                  denyButtonText: `Don't book`,
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    // Swal.fire('Saved!', '', 'success')
+                    navigate('/payment')
+                  } else if (result.isDenied) {
+                    // Swal.fire('Changes are not saved', '', 'info')
+                    navigate('/car')
+                  }
+                })
+              }
+              
+              else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'You need to login first',
+                })
               }
             }}
           >

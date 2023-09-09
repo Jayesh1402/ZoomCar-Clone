@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
-
+import Swal from 'sweetalert2';
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
@@ -17,7 +17,13 @@ export default function AuthContextProvider({ children }) {
         password: userCredential.password,
       })
       .then((res) => {
-        alert("Logged In Successfully");
+        // alert("Logged In Successfully");
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged In',
+          showConfirmButton: false,
+          timer: 2000
+        })
         setAuthStatus(true);
         setToken(res.data.token);
         let loggedIn = localStorage.getItem("isLoggedIn");
@@ -27,7 +33,12 @@ export default function AuthContextProvider({ children }) {
         localStorage.setItem("isLoggedIn", true);
       })
       .catch((err) => {
-        alert("invalid email or password");
+        // alert("invalid email or password");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Invalid email or password',
+        })
         console.log(err);
       });
   };
@@ -40,7 +51,13 @@ export default function AuthContextProvider({ children }) {
         password: userDetails.password,
       })
       .then(() => {
-        alert("registration successful");
+        // alert("registration successful");
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration completed',
+          showConfirmButton: false,
+          timer: 2000
+        })
         setTimeout(() => {
           setRegistrationStatus(true);
         }, 2000);
@@ -49,7 +66,12 @@ export default function AuthContextProvider({ children }) {
         }, 3000);
       })
       .catch((err) => {
-        alert("registration failed");
+        // alert("registration failed");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Registration failed',
+        })
         console.log(err);
       });
   };

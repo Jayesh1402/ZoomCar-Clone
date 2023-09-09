@@ -4,9 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextProvider";
 
 const initialState = {
-  username:"",
+  username: "",
   email: "",
-  password: ""
+  password: "",
 };
 
 // actions
@@ -66,7 +66,8 @@ export default function Register() {
           registerUser(state);
         }}
       >
-      <Input
+        <Input
+          required
           py="5"
           size="sm"
           placeholder="Username"
@@ -77,6 +78,7 @@ export default function Register() {
           borderRadius="0.5rem"
         />
         <Input
+          required
           py="5"
           size="sm"
           placeholder="Email Address"
@@ -86,6 +88,7 @@ export default function Register() {
           borderRadius="0.5rem"
         />
         <Input
+          required
           py="5"
           size="sm"
           placeholder="Password"

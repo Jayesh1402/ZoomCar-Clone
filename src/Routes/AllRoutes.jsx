@@ -7,7 +7,7 @@ import SignUpPage from "../Pages/SignUpPage";
 import CarPage from "../Pages/CarPage";
 import ZmsPage from "../Pages/ZmsPage";
 import Footer from "../Components/Footer";
-
+import Payment from "../Pages/Payment";
 export default function AllRoutes() {
   return (
     <BrowserRouter>
@@ -17,14 +17,16 @@ export default function AllRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/zoomcar-mobility-services" element={<ZmsPage />} />
-      <Route
+      <Route path="/car-bookings" element={<BookingsPage />} />
+      <Route path="/payment" element={<Payment />} />
+      {/* <Route
         path="/car-bookings"
         element={
           <PrivateRoute>
             <BookingsPage />
           </PrivateRoute>
         }
-      />
+      /> */}
     </Routes>
     <Footer/>
     </BrowserRouter>

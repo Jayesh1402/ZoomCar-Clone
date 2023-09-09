@@ -35,7 +35,7 @@ const addToBooking = async (carId) => {
     )
     .then((res) => {
       console.log(res.data.id);
-      alert("car booking successful");
+      // alert("car booking successful");
       if(res.data.image !== null || res.data.image !== undefined ){
         localStorage.setItem("id", res.data.id)
       }
