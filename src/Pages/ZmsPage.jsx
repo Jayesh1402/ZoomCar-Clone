@@ -14,6 +14,7 @@ var clrtxt2 = `black`
 function ZmsPage() {
 
     const [aeroplane, setAeroplane] = useState(true);
+    
 
     const handleClick=()=>{
         if(aeroplane === false)
@@ -41,6 +42,7 @@ function ZmsPage() {
 
     return (
         <>
+        <Navbar/>
             <Box margin="auto">
 
                 

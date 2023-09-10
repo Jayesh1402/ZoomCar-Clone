@@ -8,6 +8,7 @@ import CarPage from "../Pages/CarPage";
 import ZmsPage from "../Pages/ZmsPage";
 import Footer from "../Components/Footer";
 import Payment from "../Pages/Payment";
+import HostPage from "../Pages/HostPage";
 export default function AllRoutes() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ export default function AllRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/zoomcar-mobility-services" element={<ZmsPage />} />
+      <Route path="/host" element={<HostPage/>} />
       <Route path="/car-bookings" element={<BookingsPage />} />
       <Route path="/payment" element={<Payment />} />
       {/* <Route

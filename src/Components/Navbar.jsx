@@ -56,19 +56,20 @@ export default function Navbar() {
           // border="solid 1px red"
           // gap="5"
           >
-          {/* <a href="https://www.zoomcar.com/in/host/en?auth_required=true&utm_sub_source=dweb_ingress&platform=web">
+          <Link to="/host">            
             <Flex py="2" px="4" bg="white" color="black" borderRadius="1.5rem">
               <img
                 src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
                 alt="icon"
               />
-              Become a Host
+              Host Your Car
             </Flex>
-          </a> */}
-
+            </Link>
+          <Link to="/zoomcar-mobility-services">
           <p>
             <h1>ZMS</h1>
           </p>
+          </Link>
           {/* if logged in then show bookings page */}
           {isAuth ? (
             <Link to="/car-bookings">
@@ -132,6 +133,7 @@ export default function Navbar() {
               </Flex>
             </Link>
             <p >
+            <Link to="/host">
               <Flex
                 className={NavbarStyles.leftLink}
                 alignItems="center"
@@ -141,8 +143,9 @@ export default function Navbar() {
                   src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
                   alt="icon"
                 />
-                Become a Host
+                Host Your Car
               </Flex>
+              </Link>
             </p>
             <p >
               <Flex

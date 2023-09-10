@@ -1,0 +1,17 @@
+{
+  "NewCar": [
+    {
+      "image": null,
+      "name": "Renault Duster",
+      "transmission": "Manual",
+      "fuel": "Diesel",
+      "seats": "5 seats",
+      "ratings": "0.00 (0)",
+      "kms": "60k kms driven",
+      "address": "7.5 km T Block, 4th T Block East, 4th Block, Jayanagar, Bengaluru, Karnataka 560041, India",
+      "discount_price": 4297.5,
+      "original_price": "4775",
+      "id": 1
+    }
+  ]
+}

@@ -12,8 +12,8 @@ export const SidebarData = [
 
 },
 {
-	title: "Become a Host",
-	path: "/becomeahost",
+	title: "Host Your Car",
+	path: "/host",
 },
 {
 	title: "Zoomcar Fleet Vehicles Policies",
