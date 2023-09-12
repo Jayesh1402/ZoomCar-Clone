@@ -12,16 +12,16 @@ import HostPage from "../Pages/HostPage";
 export default function AllRoutes() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/car" element={<CarPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/zoomcar-mobility-services" element={<ZmsPage />} />
-      <Route path="/host" element={<HostPage/>} />
-      <Route path="/car-bookings" element={<BookingsPage />} />
-      <Route path="/payment" element={<Payment />} />
-      {/* <Route
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/car" element={<CarPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/zoomcar-mobility-services" element={<ZmsPage />} />
+        <Route path="/host" element={<HostPage />} />
+        <Route path="/car-bookings" element={<BookingsPage />} />
+        <Route path="/payment" element={<Payment />} />
+        {/* <Route
         path="/car-bookings"
         element={
           <PrivateRoute>
@@ -29,8 +29,8 @@ export default function AllRoutes() {
           </PrivateRoute>
         }
       /> */}
-    </Routes>
-    <Footer/>
+      </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { AuthContext } from "../Context/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 export default function CarCard({
   image,
   name,
@@ -96,33 +96,36 @@ export default function CarCard({
               _hover={{ bg: "green", color: "white" }}
               fontWeight="medium"
               onClick={() => {
-
                 if (isAuth && LoggedInStatusLS) {
                   // addToBooking({ ...carObj });
                   Swal.fire({
-                    title: 'Do you want to book a car?',
+                    title: "Do you want to book a car?",
+                    text: "You will be redirected to payment gateway",
+                    icon: "warning",
                     showDenyButton: true,
                     // showCancelButton: true,
-                    confirmButtonText: 'Book now',
+                    confirmButtonText: "Book now",
                     denyButtonText: `Don't book`,
                   }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
                       // Swal.fire('Saved!', '', 'success')
-                      navigate('/payment')
+                      addToBooking({ ...carObj });
+                      localStorage.setItem("price", discount_price);
+                      // console.log("id is ", _id);
+                      navigate("/payment");
                     } else if (result.isDenied) {
                       // Swal.fire('Changes are not saved', '', 'info')
-                      navigate('/car')
+
+                      navigate("/car");
                     }
-                  })
-                }
-                
-                else {
+                  });
+                } else {
                   Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'You need to login first',
-                  })
+                    icon: "error",
+                    title: "Oops...",
+                    text: "You need to login first",
+                  });
                 }
               }}
             >

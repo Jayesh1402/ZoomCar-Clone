@@ -35,9 +35,12 @@ export default function Navbar() {
         className={NavbarStyles.header}
         // border="solid 1px red"
       >
-        <Flex className={NavbarStyles.navHead} alignItems="center"
+        <Flex
+          className={NavbarStyles.navHead}
+          alignItems="center"
           // border="solid 1px red"
-          gap="5">
+          gap="5"
+        >
           <button ref={btnRef} onClick={onOpen}>
             <AiOutlineMenu />
           </button>
@@ -47,16 +50,21 @@ export default function Navbar() {
 
           <NavLink to="/">
             <Box>
-              <Img className={NavbarStyles.logo} boxSize={{ "sm": "75%", "md": "85%", "lg": "100%" }} src="https://www.zoomcar.com/build/98e56e8b0b91e8806885a22ac2bf69a7.png" />
+              <Img
+                className={NavbarStyles.logo}
+                boxSize={{ sm: "75%", md: "85%", lg: "100%" }}
+                src="https://www.zoomcar.com/build/98e56e8b0b91e8806885a22ac2bf69a7.png"
+              />
             </Box>
           </NavLink>
-
         </Flex>
-        <Flex className={NavbarStyles.navHead} alignItems="center"
+        <Flex
+          className={NavbarStyles.navHead}
+          alignItems="center"
           // border="solid 1px red"
           // gap="5"
-          >
-          <Link to="/host">            
+        >
+          <Link to="/host">
             <Flex py="2" px="4" bg="white" color="black" borderRadius="1.5rem">
               <img
                 src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
@@ -64,11 +72,11 @@ export default function Navbar() {
               />
               Host Your Car
             </Flex>
-            </Link>
+          </Link>
           <Link to="/zoomcar-mobility-services">
-          <p>
-            <h1>ZMS</h1>
-          </p>
+            <p>
+              <h1>ZMS</h1>
+            </p>
           </Link>
           {/* if logged in then show bookings page */}
           {isAuth ? (
@@ -82,8 +90,8 @@ export default function Navbar() {
             </Link>
           ) : (
             <Button
-            className={NavbarStyles.logout}
-              size={{"sm":"sm","md":"md","lg":"md"}}
+              className={NavbarStyles.logout}
+              size={{ sm: "sm", md: "md", lg: "md" }}
               bg="red"
               color="#ffffff"
               borderRadius="1.5rem"
@@ -132,29 +140,32 @@ export default function Navbar() {
                 Change City
               </Flex>
             </Link>
-            <p >
-            <Link to="/host">
-              <Flex
-                className={NavbarStyles.leftLink}
-                alignItems="center"
-                gap="4"
-              >
-                <img
-                  src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
-                  alt="icon"
-                />
-                Host Your Car
-              </Flex>
+            <p>
+              <Link to="/host">
+                <Flex
+                  className={NavbarStyles.leftLink}
+                  alignItems="center"
+                  gap="4"
+                >
+                  <img
+                    src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
+                    alt="icon"
+                  />
+                  Host Your Car
+                </Flex>
               </Link>
             </p>
-            <p >
+            <p>
               <Flex
                 className={NavbarStyles.leftLink}
                 alignItems="center"
                 gap="4"
               >
                 <BsLayoutTextSidebar />
-                Zoomcar Fleet Vehicles Policies
+                <a href="https://www.zoomcar.com/in/delhi/policy">
+                  {" "}
+                  Zoomcar Fleet Vehicles Policies{" "}
+                </a>
               </Flex>
             </p>
             <p>
@@ -164,7 +175,9 @@ export default function Navbar() {
                 gap="4"
               >
                 <BsLayoutTextSidebar />
-                Zoomcar Host Vehicles Policies
+                <a href="https://www.zoomcar.com/in/lucknow/host-policy">
+                  Zoomcar Host Vehicles Policies
+                </a>
               </Flex>
             </p>
             <p>
@@ -174,7 +187,7 @@ export default function Navbar() {
                 gap="4"
               >
                 <BsTelephone />
-                Help & Support
+                <a href="https://www.zoomcar.com/faq">Help & Support</a>
               </Flex>
             </p>
           </DrawerBody>

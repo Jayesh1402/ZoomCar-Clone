@@ -192,8 +192,6 @@ export default function HomePage() {
         </Box>
       </Box>
 
-
-
       <br />
       <br />
       <br />
@@ -261,17 +259,26 @@ export default function HomePage() {
             </TabPanel>
             <TabPanel>
               <Heading size="md">
-                Find more information about Zoomcar Blogs here
+                Find more information about Zoomcar Blogs{" "}
+                <a href="https://www.zoomcar.com/blog/">
+                  <u>here</u>
+                </a>
               </Heading>
             </TabPanel>
             <TabPanel>
               <Heading size="md">
-                Find more information about Zoomcar Careers here
+                Find more information about Zoomcar Careers{" "}
+                <a href="https://www.zoomcar.com/careers">
+                  <u>here</u>
+                </a>
               </Heading>
             </TabPanel>
             <TabPanel>
               <Heading size="md">
-                Find more information about Zoomcar Help and Support here
+                Find more information about Zoomcar Help and Support{" "}
+                <a href="https://www.zoomcar.com/faq">
+                  <u>here</u>
+                </a>
               </Heading>
             </TabPanel>
           </TabPanels>

@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContextProvider";
 import SelectLocation from "../Pages/SelectLocation";
+import Swal from "sweetalert2";
 
 export default function FindCars({ changeBackground }) {
-  
   const [isbtnclicked, setBtn] = useState(true);
   const [openModal, setModalStatus] = useState(false);
 
@@ -26,9 +26,9 @@ export default function FindCars({ changeBackground }) {
             fontWeight="light"
             bg="#F5F5F5"
             className={findCarStyles.flex}
-            px={{"sm":"10","md":"20","lg":"20"}}
+            px={{ sm: "10", md: "20", lg: "20" }}
             py="5"
-            fontSize={{"sm":"13px","md":"15px","lg":"15px"}}
+            fontSize={{ sm: "13px", md: "15px", lg: "15px" }}
             borderRightRadius="0rem"
             border={isbtnclicked ? "1px solid lightgreen" : null}
             onClick={() => {
@@ -45,10 +45,10 @@ export default function FindCars({ changeBackground }) {
             fontWeight="light"
             bg="#F5F5F5"
             className={findCarStyles.flex}
-            px={{"sm":"10","md":"20","lg":"20"}}
+            px={{ sm: "10", md: "20", lg: "20" }}
             py="5"
             mb="3"
-            fontSize={{"sm":"13px","md":"15px","lg":"15px"}}
+            fontSize={{ sm: "13px", md: "15px", lg: "15px" }}
             borderLeftRadius="0rem"
             border={!isbtnclicked ? "1px solid lightgreen" : null}
             onClick={() => {
@@ -67,7 +67,7 @@ export default function FindCars({ changeBackground }) {
           className={findCarStyles.flexBtn}
           bg="#F5F5F5"
           p="3"
-          fontSize={{"sm":"13px","md":"15px","lg":"15px"}}
+          fontSize={{ sm: "13px", md: "15px", lg: "15px" }}
           alignItems="center"
           gap="2"
           mb="3"
@@ -100,13 +100,16 @@ export default function FindCars({ changeBackground }) {
           }
           onClick={() => {
             if (location === "") {
-              alert("select location first");
+              Swal.fire({
+                icon: "warning",
+                title: "Select Location first",
+              });
             } else {
               navigate("/car");
             }
           }}
         >
-          <Text opacity={location==="" ? "0.5" : "1"}>FIND CARS</Text>
+          <Text opacity={location === "" ? "0.5" : "1"}>FIND CARS</Text>
         </Button>
       </Box>
       <SelectLocation openModal={openModal} setModalStatus={setModalStatus} />

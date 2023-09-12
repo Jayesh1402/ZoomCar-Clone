@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
@@ -19,11 +19,11 @@ export default function AuthContextProvider({ children }) {
       .then((res) => {
         // alert("Logged In Successfully");
         Swal.fire({
-          icon: 'success',
-          title: 'Logged In',
+          icon: "success",
+          title: "Logged In",
           showConfirmButton: false,
-          timer: 2000
-        })
+          timer: 2000,
+        });
         setAuthStatus(true);
         setToken(res.data.token);
         let loggedIn = localStorage.getItem("isLoggedIn");
@@ -35,10 +35,10 @@ export default function AuthContextProvider({ children }) {
       .catch((err) => {
         // alert("invalid email or password");
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Invalid email or password',
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Invalid email or password",
+        });
         console.log(err);
       });
   };
@@ -46,18 +46,18 @@ export default function AuthContextProvider({ children }) {
   const registerUser = (userDetails) => {
     axios
       .post("http://localhost:9393/api/v1/auth/register", {
-        username:userDetails.username,
+        username: userDetails.username,
         email: userDetails.email,
         password: userDetails.password,
       })
       .then(() => {
         // alert("registration successful");
         Swal.fire({
-          icon: 'success',
-          title: 'Registration completed',
+          icon: "success",
+          title: "Registration completed",
           showConfirmButton: false,
-          timer: 2000
-        })
+          timer: 2000,
+        });
         setTimeout(() => {
           setRegistrationStatus(true);
         }, 2000);
@@ -68,10 +68,10 @@ export default function AuthContextProvider({ children }) {
       .catch((err) => {
         // alert("registration failed");
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Registration failed',
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Registration failed",
+        });
         console.log(err);
       });
   };
@@ -80,12 +80,19 @@ export default function AuthContextProvider({ children }) {
     setAuthStatus(false);
     setToken(null);
     localStorage.setItem("isLoggedIn", false);
+    Swal.fire({
+      icon: "success",
+      title: "Logged Out",
+      showConfirmButton: false,
+      text: "Thanks for choosing ZoomCar",
+      timer: 2200,
+    });
   };
 
   const changeLocation = (newLocation) => {
     setLocation(newLocation);
   };
-  
+
   return (
     <AuthContext.Provider
       value={{

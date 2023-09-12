@@ -11,11 +11,14 @@ import SmallScreenCarCard from "../Components/SmallScreenCarCard";
 import { AuthContext } from "../Context/AuthContextProvider";
 import SelectLocation from "./SelectLocation";
 
-let today = new Date().toISOString().slice(0, 10) +" / "+ new Date().toLocaleTimeString();
+let today =
+  new Date().toISOString().slice(0, 10) +
+  " / " +
+  new Date().toLocaleTimeString();
 var end = new Date();
 end.setHours(23, 59, 59);
-console.log(end.toUTCString())
-console.log(today)
+console.log(end.toUTCString());
+console.log(today);
 
 const addToBooking = async (carId) => {
   // get token from ls
@@ -37,8 +40,8 @@ const addToBooking = async (carId) => {
     .then((res) => {
       console.log(res.data.id);
       // alert("car booking successful");
-      if(res.data.image !== null || res.data.image !== undefined ){
-        localStorage.setItem("id", res.data.id)
+      if (res.data.image !== null || res.data.image !== undefined) {
+        localStorage.setItem("id", res.data.id);
       }
     })
     .catch((err) => {
@@ -297,7 +300,10 @@ export default function CarPage() {
               >
                 <Box textAlign="left">
                   <Text fontSize="10px">START DATE/TIME</Text>
-                  <Text fontSize={{"sm":"9px","md":"10px","lg":"12px"}} fontWeight="bold">
+                  <Text
+                    fontSize={{ sm: "9px", md: "10px", lg: "12px" }}
+                    fontWeight="bold"
+                  >
                     {/* 1 Oct, 2022 02:00 PM{" "} */}
                     <DateTimePicker />
                     {/* {today} */}
@@ -308,7 +314,10 @@ export default function CarPage() {
                 </Box>
                 <Box textAlign="right">
                   <Text fontSize="10px">END DATE/TIME</Text>
-                  <Text fontSize={{"sm":"9px","md":"10px","lg":"12px"}} fontWeight="bold">
+                  <Text
+                    fontSize={{ sm: "9px", md: "10px", lg: "12px" }}
+                    fontWeight="bold"
+                  >
                     {/* 1 Oct, 2022 10:00 PM{" "} */}
                     <DateTimePicker />
                     {/* {end.toUTCString()} */}
