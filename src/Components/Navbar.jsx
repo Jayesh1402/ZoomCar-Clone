@@ -33,20 +33,11 @@ export default function Navbar() {
         flexWrap="wrap"
         alignItems="center"
         className={NavbarStyles.header}
-        // border="solid 1px red"
       >
-        <Flex
-          className={NavbarStyles.navHead}
-          alignItems="center"
-          // border="solid 1px red"
-          gap="5"
-        >
+        <Flex className={NavbarStyles.navHead} alignItems="center" gap="5">
           <button ref={btnRef} onClick={onOpen}>
             <AiOutlineMenu />
           </button>
-          {/* <Heading size="md" className={NavbarStyles.logo}>
-            <Link to="/">ZOOMCAR</Link>
-          </Heading>  */}
 
           <NavLink to="/">
             <Box>
@@ -58,21 +49,24 @@ export default function Navbar() {
             </Box>
           </NavLink>
         </Flex>
-        <Flex
-          className={NavbarStyles.navHead}
-          alignItems="center"
-          // border="solid 1px red"
-          // gap="5"
-        >
-          <Link to="/host">
-            <Flex py="2" px="4" bg="white" color="black" borderRadius="1.5rem">
-              <img
-                src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
-                alt="icon"
-              />
-              Host Your Car
-            </Flex>
-          </Link>
+        <Flex className={NavbarStyles.navHead} alignItems="center">
+          {isAuth ? (
+            <Link to="/host">
+              <Flex
+                py="2"
+                px="4"
+                bg="white"
+                color="black"
+                borderRadius="1.5rem"
+              >
+                <img
+                  src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
+                  alt="icon"
+                />
+                Host Your Car
+              </Flex>
+            </Link>
+          ) : null}
           <Link to="/zoomcar-mobility-services">
             <p>
               <h1>ZMS</h1>
@@ -96,7 +90,7 @@ export default function Navbar() {
               color="#ffffff"
               borderRadius="1.5rem"
               _hover="none"
-              // fontSize={{"sm":"7px","md":"15px","lg":"15px"}}
+              fontSize={{ sm: "7px", md: "15px", lg: "15px" }}
               onClick={() => {
                 logOutUser();
                 navigate("/");
@@ -118,15 +112,39 @@ export default function Navbar() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerBody border="1px solid black" p="0" m="0">
-            <Link to="/login">
+            {!isAuth ? (
+              <Link to="/login">
+                <Flex
+                  className={NavbarStyles.leftLink}
+                  alignItems="center"
+                  gap="4"
+                >
+                  <FaUserAlt /> Login or Signup
+                </Flex>
+              </Link>
+            ) : (
               <Flex
                 className={NavbarStyles.leftLink}
                 alignItems="center"
                 gap="4"
               >
-                <FaUserAlt /> Login or Signup
+                <Button
+                  className={NavbarStyles.logout}
+                  size={{ sm: "sm", md: "md", lg: "md" }}
+                  bg="red"
+                  color="#ffffff"
+                  borderRadius="1.5rem"
+                  _hover="none"
+                  fontSize={{ sm: "7px", md: "15px", lg: "15px" }}
+                  onClick={() => {
+                    logOutUser();
+                    navigate("/");
+                  }}
+                >
+                  LOGOUT
+                </Button>
               </Flex>
-            </Link>
+            )}
             <Link to="/">
               <Flex
                 className={NavbarStyles.leftLink}

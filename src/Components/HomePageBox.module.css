@@ -3,12 +3,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    min-height: 500px;
+    min-height: 550px;
+    margin-bottom: 45px;
 }
 .background2{
     background-image: url(../Images/banner_airport.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    min-height: 500px;
+    min-height: 550px;
+    margin-bottom: 45px;
 }

@@ -11,36 +11,28 @@ import {
   Button,
 } from "@chakra-ui/react";
 import axios from "axios";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-  list,
-} from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from "./firebase";
 import { v4 } from "uuid";
 import Swal from "sweetalert2";
-// import ImageUpload from "./ImageUpload";
-// import { useMyValue } from "../Context/Context";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const CarForm = () => {
   const [formData, setFormData] = useState({
     image: null,
     name: "",
     transmission: "manual",
-    fuel: "petrol",
+    fuel: "Petrol",
     seats: "4",
-    car_type: "",
+    carType: "hatchback",
     ratings: "0.00 (0)",
     kms: "",
     address: "",
     discount_price: "",
     original_price: "",
+    userId: "",
   });
-
-  // const { lastItem } = useMyValue();
-  // console.log(lastItem);
 
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
@@ -54,7 +46,6 @@ const CarForm = () => {
         setImageUrls((prev) => [...prev, url]);
       });
     });
-    // localStorage.setItem("image", lastUrl);
   };
 
   useEffect(() => {
@@ -65,7 +56,7 @@ const CarForm = () => {
         });
       });
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const lastUrl = imageUrls[imageUrls.length - 1];
   // console.log(lastUrl);
@@ -84,19 +75,20 @@ const CarForm = () => {
       transmission: value,
     });
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
+    let token = localStorage.getItem("token");
+    var decoded = jwt_decode(token);
     e.preventDefault();
     try {
       // Update formData
       formData.discount_price = (formData.original_price * 90) / 100;
-      formData.seats = formData.seats + " seats";
-      formData.kms = formData.kms + "k kms driven";
       formData.image = lastUrl;
+      formData.userId = decoded.sub;
 
-      // Send formData to your backend API, including the image as a base64-encoded string
-      await axios.post("http://localhost:3003/newcar", formData);
+      await axios.post("http://localhost:9393/api/v1/car/addCar", formData);
       // console.log(formData);
+
       // Reset the form
       setFormData({
         name: "",
@@ -109,15 +101,15 @@ const CarForm = () => {
         discount_price: "",
         original_price: "",
         image: null,
+        userId: "",
       });
       Swal.fire({
         icon: "success",
-        title: "Your Car has been Hosted Successfylly",
+        title: "Your Car has been Hosted Successfully",
         text: "Thanks for choosing ZoomCar",
       });
-      // Handle success or redirect the user
+      navigate("/car");
     } catch (error) {
-      // Handle error
       console.error("Error:", error);
     }
   };
@@ -147,8 +139,8 @@ const CarForm = () => {
             name="transmission"
             value={formData.transmission}
             onChange={handleTransmissionChange}
-            flexDirection="column" // Align radio buttons vertically
-            spacing={2} // Add spacing between radio buttons
+            flexDirection="column"
+            spacing={2}
           >
             <Radio value="Manual">Manual</Radio>{" "}
             <Radio value="Auto">Auto</Radio>
@@ -168,8 +160,8 @@ const CarForm = () => {
         <FormControl id="car_type" isRequired>
           <FormLabel>Car Type</FormLabel>
           <Select
-            name="car_type"
-            value={formData.car_type}
+            name="carType"
+            value={formData.carType}
             onChange={handleChange}
           >
             <option value="hatchback">Hatchback</option>
@@ -210,13 +202,6 @@ const CarForm = () => {
 
         <FormControl id="image" isRequired>
           <FormLabel>Picture of Your Car</FormLabel>
-          {/* <Input
-            type="file"
-            name="image"
-            accept="image/*"
-            // onChange={handleImageUpload}
-          /> */}
-          {/* <ImageUpload /> */}
           <input
             type="file"
             onChange={(event) => {
@@ -231,16 +216,12 @@ const CarForm = () => {
               borderRadius: "2px",
             }}
             onClick={() => {
-              // setLastItemValue();
               uploadFile();
             }}
           >
             {" "}
             Upload Image
           </button>
-          {/* {imageUrls.map((url) => {
-        return <img src={lastItem} />;
-      })} */}
         </FormControl>
 
         <FormControl id="address" isRequired>

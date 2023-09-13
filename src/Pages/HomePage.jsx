@@ -11,7 +11,6 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { useContext } from "react";
 import HomePageBox from "../Components/HomePageBox";
-import Navbar from "../Components/Navbar";
 import { AuthContext } from "../Context/AuthContextProvider";
 import Slider from "../Components/Slider";
 import Slider2 from "../Components/Slider2";
@@ -20,86 +19,28 @@ export default function HomePage() {
 
   return (
     <div>
-      <Navbar />
       <HomePageBox />
-      {/* <Box w="70%" margin="auto">
-        <Heading size="sm" mt="5" textAlign="left">
-          SELF DRIVE CARS IN {location!=="" ? location : "BANGLORE"}
+
+      <Box w="70%" margin="auto">
+        <Heading
+          fontWeight="bold"
+          fontSize={["lg", "2xl", "2xl", "3xl"]}
+          mt="5"
+          textAlign="left"
+        >
+          SELF DRIVE CARS IN {location !== "" ? location : "BANGLORE"}
         </Heading>
-        <Text fontSize="15px" textAlign="left" mt="1">
-          In addition to being the capital city, {location!=="" ? location : "BANGLORE"} is a cosmopolitan city
-          with people from all over the country, and ready to embrace an
-          evolving lifestyle. Surrounded by the 4 states of Haryana, Rajasthan,
-          Punjab, and Uttar Pradesh, {location!=="" ? location : "BANGLORE"} has a mixed culture and a vibrant
-          social life. With an expanding road length of over 25,000 kilometres
-          (including national highways), there has been a steady rise in the
-          self drive car rental in {location!=="" ? location : "BANGLORE"} that are more affordable than
-          chauffeur-driven vehicles and offers on-road convenience to young
-          drivers and working professionals.{" "}
-        </Text>
-        <Heading size="sm" mt="5" textAlign="left">
-          CAR ON RENT IN {location!=="" ? location : "BANGLORE"}
-        </Heading>
-        <Text fontSize="15px" textAlign="left" mt="1">
-          Zoomcar allows you to hire a rental or self-drive car of your choice
-          at an affordable rate. Sign up on our website or mobile app, and
-          decide on the rental duration, pickup location, and car type. You can
-          use Zoomcar to pick the car that is suited for your needs. For
-          instance, choose a small car that can zip you through the city traffic
-          in {location!=="" ? location : "BANGLORE"}, or a spacious SUV for an outstation travel such as for a
-          drive from {location!=="" ? location : "BANGLORE"} to Agra. Car rentals make it possible for you to pick
-          a car which suits your purpose, whether it is a small one when you are
-          travelling alone, or a bigger spacious one when you are in a group.
-          For a small convenience fee, you can also avail of our {location!=="" ? location : "BANGLORE"} airport
-          Taxi. The {location!=="" ? location : "BANGLORE"} airport draws travellers from all over the world, and
-          the easiest way to get a set of wheels on arrival is to hire a
-          self-drive car which will be available as soon as you land. You can
-          also opt for our luxury car hires such as Mercedes or Audi models for
-          that special evening with your friend, or for attending a wedding in
-          the city. Zoomcar provides you with the joy of driving a car, without
-          any of the added responsibilities involved in owning a car such as
-          filling up petrol, getting your car serviced, or paying for car
-          insurance. It also ensures safety (especially for young women) while
-          travelling in a group or individually.
-        </Text>
-        <Heading size="sm" mt="5" textAlign="left">
-          RENT A CAR IN {location!=="" ? location : "BANGLORE"}
-        </Heading>
-        <Text fontSize="15px" textAlign="left" mt="1">
-          Zoomcar provides you with a car on rent in {location!=="" ? location : "BANGLORE"} without a driver.
-          Book your car conveniently through online booking or on your
-          smartphone. The vehicles have all-India permits, and Zoomcar provides
-          multiple parking sites across the country from where you can pick up
-          your chosen car. You also have the flexibility of choosing from
-          various packages, depending on whether you need the vehicle for a
-          longer time or a longer distance.
-        </Text>
-        <Heading size="sm" mt="5" textAlign="left">
-          ABOUT ZOOMCAR
-        </Heading>
-        <Text fontSize="15px" textAlign="left" mt="1">
-          No more worries about petrol mileage, fuel costs, insurance, and car
-          breakdowns! Zoomcar has enabled driving convenience for travellers
-          around the country and is fast expanding its reach to cities including
-          Ahmedabad, Bangalore, Chandigarh, Chennai, Coimbatore, Delhi-NCR,
-          Hyderabad, Jaipur, Kochi, Kolkata, Ludhiana, Mangalore, Mumbai,
-          Mysore, Pune, Siliguri and Vizag. Self-drive cars from Zoomcar have
-          given customers more control, privacy, and freedom. Book a self-drive
-          car in any city you visit with the Zoomcar app on your phone and feel
-          at home wherever you go.{" "}
+        <Text fontSize="20px" textAlign="left" mt="1">
+          Zoomcar provides you with a car on rent in{" "}
+          {location !== "" ? location : "BANGLORE"} without a driver. Book your
+          car conveniently through online booking or on your smartphone. The
+          vehicles have all-India permits, and Zoomcar provides multiple parking
+          sites across the country from where you can pick up your chosen car.
+          You also have the flexibility of choosing from various packages,
+          depending on whether you need the vehicle for a longer time or a
+          longer distance.
         </Text>
       </Box>
-      <Box>
-        <Image
-        m="5"
-          src="https://www.zoomcar.com/build/6b51f1464b17dbb1d002f16e26572662.png"
-          alt="tagline"
-          maxH="200px"
-        />
-      </Box>
-      <Text align="center" mt="5" mb="2" fontSize="12px">
-        © Copyright 2022 Zoomcar India Private Ltd. All rights reserved
-      </Text> */}
       <br />
       <br />
       <br />
@@ -155,38 +96,30 @@ export default function HomePage() {
             gap={4}
           >
             <GridItem>
-              <a>
-                <Image
-                  src="https://zoomcar-assets.zoomcar.com/pictures/original/d70e7f58da384df0f3ba169cf19e8e931879c66c.jpeg?1652354515"
-                  borderRadius="10px"
-                />
-              </a>
+              <Image
+                src="https://zoomcar-assets.zoomcar.com/pictures/original/d70e7f58da384df0f3ba169cf19e8e931879c66c.jpeg?1652354515"
+                borderRadius="10px"
+              />
             </GridItem>
             <GridItem>
-              <a>
-                <Image
-                  src="https://zoomcar-assets.zoomcar.com/pictures/original/e3dfe0ed91abc29facaf56a327b4498ce4e9b75e.jpeg?1652363808"
-                  borderRadius="10px"
-                />
-              </a>
+              <Image
+                src="https://zoomcar-assets.zoomcar.com/pictures/original/e3dfe0ed91abc29facaf56a327b4498ce4e9b75e.jpeg?1652363808"
+                borderRadius="10px"
+              />
             </GridItem>
             <GridItem>
-              <a>
-                <Image
-                  src="https://zoomcar-assets.zoomcar.com/pictures/original/e3dfe0ed91abc29facaf56a327b4498ce4e9b75e.jpeg?1652363808"
-                  borderRadius="10px"
-                  w="100%"
-                />
-              </a>
+              <Image
+                src="https://zoomcar-assets.zoomcar.com/pictures/original/e3dfe0ed91abc29facaf56a327b4498ce4e9b75e.jpeg?1652363808"
+                borderRadius="10px"
+                w="100%"
+              />
             </GridItem>
             <GridItem>
-              <a>
-                <Image
-                  src="https://zoomcar-assets.zoomcar.com/pictures/original/55c3970a33c8f4d10dd3c9ace39d20e32af5c8ba.jpg?1651758755"
-                  borderRadius="10px"
-                  h="100%"
-                />
-              </a>
+              <Image
+                src="https://zoomcar-assets.zoomcar.com/pictures/original/55c3970a33c8f4d10dd3c9ace39d20e32af5c8ba.jpg?1651758755"
+                borderRadius="10px"
+                h="100%"
+              />
             </GridItem>
           </Grid>
         </Box>
@@ -195,14 +128,14 @@ export default function HomePage() {
       <br />
       <br />
       <br />
-      <Box pt={"2rem"} bg={"#52d168"} color={"white"}>
-        <Tabs w={"90%"} margin="auto" bg="#52d168" variant="unstyled">
+      <Box pt={"2rem"} bg={"#383838"} color={"white"}>
+        <Tabs w={"90%"} margin="auto" bg="#383838" variant="unstyled">
           <TabList justifyContent={"space-between"}>
             <Tab
               _selected={{ borderBottom: "2px solid white" }}
               fontWeight="bold"
             >
-              <Heading size={["xs", "md"]} color={"#040d05"}>
+              <Heading size={["xs", "md"]} color={"white"}>
                 ABOUT US
               </Heading>
             </Tab>
@@ -210,7 +143,7 @@ export default function HomePage() {
               _selected={{ borderBottom: "2px solid white" }}
               fontWeight="bold"
             >
-              <Heading size={["xs", "md"]} color={"#040d05"}>
+              <Heading size={["xs", "md"]} color={"white"}>
                 BLOGS
               </Heading>
             </Tab>
@@ -218,7 +151,7 @@ export default function HomePage() {
               _selected={{ borderBottom: "2px solid white" }}
               fontWeight="bold"
             >
-              <Heading size={["xs", "md"]} color={"#040d05"}>
+              <Heading size={["xs", "md"]} color={"white"}>
                 CAREERS
               </Heading>
             </Tab>
@@ -226,36 +159,52 @@ export default function HomePage() {
               _selected={{ borderBottom: "2px solid white" }}
               fontWeight="bold"
             >
-              <Heading size={["xs", "md"]} color={"#040d05"}>
+              <Heading size={["xs", "md"]} color={"white"}>
                 HELP & SUPPORT
               </Heading>
             </Tab>
           </TabList>
           <br />
           <TabPanels>
-            <TabPanel>
-              <Heading size="md">About Quick-Car</Heading>
+            <TabPanel style={{ textAlign: "left" }}>
+              <Heading size="md"> Drive your dreams with Zoomcar </Heading>
+              <br />
+
               <Text>
-                Zoomcar is India’s largest marketplace for cars on rent. From
-                short road trips to quick in-city drives for groceries, supply
-                pick-up, food runs, we have the cheapest car rental options for
-                all your needs! A hatchback for daily commute, a sedan for short
-                trips, SUV for hills or a luxury car for a surprise.
+                Are you ready to discover the vibrant city of Lucknow in a
+                Zoomcar? Rent a car in Lucknow and with Zoomcar and enjoy
+                convenient and affordable rides on your own. With Zoomcar, you
+                can explore the city at your own pace and enjoy the freedom of
+                choosing your own itinerary.
+                <br /> <br /> Whether you're in Lucknow for business or leisure,
+                Zoomcar in Lucknow offers you the perfect mode of
+                transportation. Explore the city's rich cultural heritage,
+                sample its delicious cuisine, and immerse yourself in its
+                vibrant street life.
               </Text>
+              <br />
+              <Heading size="md">Want A Specific Car?</Heading>
+              <br />
               <Text>
-                With Zoomcar, you can experience the convenience of online
-                booking. The cars listed on our platform come with all-India
-                permits that include vehicle insurance. It is extremely easy to
-                pick up the car from the host location. You can drive unlimited
-                KMs, with 100% Free Cancellation up to 6 hours before the trip
-                start, 0 Security Deposit, 0 Toll Charges, and 24/7 Roadside
-                Assistance. Car rent per KM starts as low as Rs. 49/hour. From
-                short road trips to quick in-city drives for groceries, supply
-                pick-up, meeting friends and family, doctor visits, business
-                trips, we have the cheapest car rental options for all your
-                needs! A hatchback for daily commute, a sedan for short trips,
-                SUV for hills or a luxury car for a surprise.
+                We've Got It All: Rent Tata Nexon | Rent Honda Jazz | Rent
+                Hyundai Creta | Rent Maruti Brezza | Rent Mahindra | Rent XUV500
+                | Rent Hyundai Verna | Rent Maruti Swift | Rent Toyota Innova |
+                Rent Reanult Kwid | Rent Maruti Baleno | Rent Mahindra TUV300|
+                Rent Maruti Swift | Rent Hyundai i20 | Rent Maruti Ertiga | Rent
+                Volkswagen Polo | Rent Hyundai Venue | Rent Hyundai Eon | Rent
+                Maruti S-Cross | Rent Maruti | Rent Dzire | Rent Honda Amaze |
+                Rent Hyundai Verna | Rent Maruti Ciaz | Rent Hyundai Creta |
+                Rent Renault Triber | Rent Maruti S-Cross | Rent Toyota Innova |
+                Rent Mahindra TUV300 | Rent Tata Tiago | Rent Maruti Wagon R |
+                Rent Datson Redi-Go | Rent Maruti Alto | Rent Hyundai Grand i10
+                | Rent Hyundai Xcent | Rent Maruti S-Presso | Rent Hyundai
+                Santro | Rent Hyundai Verna | Rent Maruti Ignis | Rent Nissan
+                Magnite | Rent Toyota Glanza | Rent Honda City | Rent Maruti
+                Dzire | Rent Datson GO T | Rent Nissan Sunny | Rent Renault
+                Kiger | Rent Hyundai Aura | Rent Renault Duster | Rent Mahindra
+                Bolero | Rent Tata Altroz | Rent Ford EcoSport
               </Text>
+              <br />
             </TabPanel>
             <TabPanel>
               <Heading size="md">

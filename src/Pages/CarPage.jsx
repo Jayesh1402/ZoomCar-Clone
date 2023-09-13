@@ -5,41 +5,24 @@ import { BsArrowRight } from "react-icons/bs";
 import SortAndFilters from "../Components/SortAndFilters";
 import CarCard from "../Components/CarCard";
 import DateTimePicker from "../Components/DateTimePicker";
-import Navbar from "../Components/Navbar";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import SmallScreenCarCard from "../Components/SmallScreenCarCard";
 import { AuthContext } from "../Context/AuthContextProvider";
 import SelectLocation from "./SelectLocation";
-
-let today =
-  new Date().toISOString().slice(0, 10) +
-  " / " +
-  new Date().toLocaleTimeString();
-var end = new Date();
-end.setHours(23, 59, 59);
-console.log(end.toUTCString());
-console.log(today);
+import Loader from "../Components/Loader";
 
 const addToBooking = async (carId) => {
   // get token from ls
   let token = localStorage.getItem("token");
-
+  var decoded = jwt_decode(token);
+  console.log(decoded.sub);
   await axios
-    .post(
-      "https://mock-data-3aee.onrender.com/bookings",
-      {
-        car_id: carId,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          token: token,
-        },
-      }
-    )
+    .post("http://localhost:9393/api/v1/booking/bookCar", {
+      carId: { ...carId, userId: decoded.sub },
+    })
     .then((res) => {
       console.log(res.data.id);
-      // alert("car booking successful");
       if (res.data.image !== null || res.data.image !== undefined) {
         localStorage.setItem("id", res.data.id);
       }
@@ -47,30 +30,13 @@ const addToBooking = async (carId) => {
     .catch((err) => {
       console.log(err);
     });
-
-  // old
-  // return axios
-  //   .post(`https://json-server-p1rm.onrender.com/bookings`, {
-  //     image: carObj.image,
-  //     name: carObj.name,
-  //     transmission: carObj.transmission,
-  //     fuel: carObj.fuel,
-  //     seats: carObj.seats,
-  //     ratings: carObj.ratings,
-  //     kms: carObj.kms,
-  //     address: carObj.address,
-  //     discount_price: carObj.discount_price,
-  //     original_price: carObj.original_price,
-  //   })
-  //   .then(() => {
-  //     alert("booking successful");
-  //   });
 };
 
 export default function CarPage() {
   const [isSmallerThan950] = useMediaQuery("(max-width: 950px)");
   const [isSmallerThan650] = useMediaQuery("(max-width: 650px)");
   const [sortOrFilterApplied, setSortOrFilterApplied] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // to handle select location modal box
   const { location } = useContext(AuthContext);
@@ -78,14 +44,19 @@ export default function CarPage() {
 
   // for storing cars data
   const [carsArray, setCarsArray] = useState([]);
-  // const [filteredCars, setFilteredCars] = useState([]);
 
   // function to get cars data
   const getAllCars = async () => {
     await axios
-      .get("https://zoomcar-api-two.vercel.app/cars")
+      .get("http://localhost:9393/api/v1/car/getCars", {
+        params: {
+          startDateTime: "2017-01-13T18:09:42.411",
+          endDateTime: "2017-01-14T16:09:42.411",
+        },
+      })
       .then((res) => {
         setCarsArray(res.data);
+        setLoading(false);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
@@ -93,10 +64,9 @@ export default function CarPage() {
 
   // function to display searched car
   const displaySearchedCar = async (carName) => {
-    // search for cars through api and update the results
     if (carName !== "") {
       let data = await axios
-        .get(`https://zoomcar-api-two.vercel.app/search/${carName}`)
+        .get(`http://localhost:9393/api/v1/car/getCarsByName/${carName}`)
         .then(
           (res) =>
             // update carsArray
@@ -116,9 +86,6 @@ export default function CarPage() {
 
   // function to handle sorted cars
   const handleSortedCars = (sortType) => {
-    // console.log(sortType);
-    // relevance,lowToHigh,highToLow,bestRated,distance,carAge,kmsDriven,popularity
-    // for relevance do nothing
     let sortedCars = [...carsArray];
     if (sortType === "lowToHigh") {
       sortedCars.sort(
@@ -148,13 +115,15 @@ export default function CarPage() {
       setCarsArray(sortedCars);
     } else if (sortType === "kmsDriven" || sortType === "carAge") {
       sortedCars.sort((a, b) => {
-        let d1 = a.kms.split(" ")[0].split("");
+        console.log(a);
+        console.log(b);
+        let d1 = `${a.kms}k kms driven`.split(" ")[0].split("");
         let d11 = [...d1];
         d11.pop();
         d11 = d11.join("");
         d1 = Number(d11);
 
-        let d2 = b.kms.split(" ")[0].split("");
+        let d2 = `${b.kms}k kms driven`.split(" ")[0].split("");
         let d22 = [...d2];
         d22.pop();
         d22 = d22.join("");
@@ -170,33 +139,32 @@ export default function CarPage() {
 
   // function to handle filter car
   const handleFilteredCars = (filteredCarsData) => {
-    // console.log(filteredCarsData);
-    // set the carsArray with received filtered cars
     setCarsArray(filteredCarsData);
 
-    // if filteredCarsData === "" , refetch all cars , run getallcars fn
     if (filteredCarsData === "") {
       setCarsArray([]);
-      // , run getallcars fn
       getAllCars();
     } else {
       setCarsArray(filteredCarsData);
     }
   };
 
-  // function to filter car based on car age using slider
   const filterCarByAgeUsingSlider = async (carAge) => {
     console.log(carAge);
-    // make an api request to get all cars and perform filtering
     let data = await axios
-      .get("https://zoomcar-api-two.vercel.app/cars")
+      .get("http://localhost:9393/api/v1/car/getCars", {
+        params: {
+          startDateTime: "2017-01-13T18:09:42.411",
+          endDateTime: "2017-01-14T16:09:42.411",
+        },
+      })
       .then((res) => res.data)
       .catch((err) => "error");
 
     if (data !== "error") {
       let cars = [];
       data.forEach((c) => {
-        let d1 = c.kms.split(" ")[0].split("");
+        let d1 = `${c.kms}k kms driven`.split(" ")[0].split("");
         let d11 = [...d1];
         d11.pop();
         d11 = d11.join("");
@@ -214,16 +182,20 @@ export default function CarPage() {
   // function to filter car based on kms run using slider
   const filterCarByKmsUsingSlider = async (kmsRun) => {
     console.log(kmsRun);
-    // make an api request to get all cars and perform filtering
     let data = await axios
-      .get("https://zoomcar-api-two.vercel.app/cars")
+      .get("http://localhost:9393/api/v1/car/getCars", {
+        params: {
+          startDateTime: "2017-01-13T18:09:42.411",
+          endDateTime: "2017-01-14T16:09:42.411",
+        },
+      })
       .then((res) => res.data)
       .catch((err) => "error");
 
     if (data !== "error") {
       let cars = [];
       data.forEach((c) => {
-        let d1 = c.kms.split(" ")[0].split("");
+        let d1 = `${c.kms}k kms driven`.split(" ")[0].split("");
         let d11 = [...d1];
         d11.pop();
         d11 = d11.join("");
@@ -239,18 +211,11 @@ export default function CarPage() {
   };
 
   useEffect(() => {
-    // axios
-    //   .get("https://zoomcar-api-two.vercel.app/cars")
-    //   .then((res) => {
-    //     setCarsArray(res.data);
-    //   })
-    //   .catch((err) => console.log(err));
     getAllCars();
   }, []);
 
   return (
     <>
-      <Navbar />
       <Flex justifyContent="center" gap="4" py="3" flexWrap="wrap" bg="#f5f5f5">
         {!isSmallerThan950 && (
           <SortAndFilters
@@ -304,9 +269,7 @@ export default function CarPage() {
                     fontSize={{ sm: "9px", md: "10px", lg: "12px" }}
                     fontWeight="bold"
                   >
-                    {/* 1 Oct, 2022 02:00 PM{" "} */}
                     <DateTimePicker />
-                    {/* {today} */}
                   </Text>
                 </Box>
                 <Box>
@@ -318,9 +281,7 @@ export default function CarPage() {
                     fontSize={{ sm: "9px", md: "10px", lg: "12px" }}
                     fontWeight="bold"
                   >
-                    {/* 1 Oct, 2022 10:00 PM{" "} */}
                     <DateTimePicker />
-                    {/* {end.toUTCString()} */}
                   </Text>
                 </Box>
               </Flex>
@@ -328,11 +289,7 @@ export default function CarPage() {
           )}
           <br />
           {/* car list data */}
-          <Box
-            // maxH={!isSmallerThan650 && "500px"}
-            maxH={"83vh"}
-            overflow={!isSmallerThan650 && "auto"}
-          >
+          <Box maxH={"83vh"} overflow={!isSmallerThan650 && "auto"}>
             {!isSmallerThan650
               ? carsArray.map((car) => (
                   <CarCard
@@ -368,14 +325,11 @@ export default function CarPage() {
                     addToBooking={addToBooking}
                   />
                 ))}
-            {carsArray.length === 0 ? <Text m="3">No Cars Found..</Text> : null}
+            {carsArray.length === 0 ? <Loader loading={loading} /> : null}
           </Box>
         </Box>
       </Flex>
-      {
-        // open modal
-        <SelectLocation openModal={openModal} setModalStatus={setModalStatus} />
-      }
+      {<SelectLocation openModal={openModal} setModalStatus={setModalStatus} />}
     </>
   );
 }

@@ -52,52 +52,54 @@ export default function Login() {
 
   return (
     <>
-      <Text fontSize="lg" fontWeight="bold" color="blue.500" mb="3">
-        Login
-      </Text>
-      <form
-        style={{ width: "70%", margin: "auto", marginBottom: "5px" }}
-        onSubmit={(e) => {
-          e.preventDefault();
-          loginUser(state);
-        }}
-      >
-        <Input
-          py="5"
-          size="sm"
-          placeholder="Email Address"
-          type="email"
-          value={state.email}
-          onChange={(e) => dispatch(emailAction(e.target.value))}
-          borderRadius="0.5rem"
-        />
-        <Input
-          py="5"
-          size="sm"
-          placeholder="Password"
-          type="password"
-          value={state.password}
-          onChange={(e) => dispatch(passwordAction(e.target.value))}
-          borderRadius="0.5rem"
-          marginBottom="3%"
-          marginTop="3%"
-        />
-        <Button
-          size="sm"
-          mt="2"
-          backgroundColor="teal"
-          _hover={{ background: "blue.500", color: "white" }}
-          type="submit"
+      <div style={{ paddingBottom: "50px" }}>
+        <Text fontSize="lg" fontWeight="bold" color="blue.500" mb="3">
+          Login
+        </Text>
+        <form
+          style={{ width: "70%", margin: "auto", marginBottom: "5px" }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            loginUser(state);
+          }}
         >
-          Submit
-        </Button>
-      </form>
-      <small>
-        Not Registered?,{" "}
-        <Link to="/signup">
-          <u style={{ color: "red" }}>Register Here</u>
-        </Link>
-      </small>
+          <Input
+            py="5"
+            size="sm"
+            placeholder="Email Address"
+            type="email"
+            value={state.email}
+            onChange={(e) => dispatch(emailAction(e.target.value))}
+            borderRadius="0.5rem"
+          />
+          <Input
+            py="5"
+            size="sm"
+            placeholder="Password"
+            type="password"
+            value={state.password}
+            onChange={(e) => dispatch(passwordAction(e.target.value))}
+            borderRadius="0.5rem"
+            marginBottom="3%"
+            marginTop="3%"
+          />
+          <Button
+            size="sm"
+            mt="2"
+            backgroundColor="teal"
+            _hover={{ background: "blue.500", color: "white" }}
+            type="submit"
+          >
+            Submit
+          </Button>
+        </form>
+        <small>
+          Not Registered?,{" "}
+          <Link to="/signup">
+            <u style={{ color: "red" }}>Register Here</u>
+          </Link>
+        </small>
+      </div>
     </>
   );
 }

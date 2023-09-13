@@ -1,40 +1,33 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+let today =
+  new Date().toISOString().slice(0, 10) +
+  " / " +
+  new Date().toLocaleTimeString();
+var end = new Date();
+end.setHours(23, 59, 59);
 
 function DateTimePicker() {
   const [selectedDate, setSelectedDate] = useState(null);
-  const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   return (
-    <div>
-      <div>
-        {/* <label>Select Date and Time:</label> */}
-        {/* <div onClick={() => setIsPickerOpen(!isPickerOpen)}>
-          <span style={{ cursor: 'pointer' }}>
-            {selectedDate
-              ? selectedDate.toString()
-              : 'Click here to select date and time'}
-          </span>
-        </div> */}
-      </div>
-      {/* {isPickerOpen && ( */}
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-          placeholderText="Select date and time"
-        />
-      {/* )} */}
-    
-    </div>
+    <>
+      <DatePicker
+        selected={selectedDate}
+        onChange={handleDateChange}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        dateFormat="MMMM d, yyyy h:mm aa"
+        placeholderText={today}
+      />
+    </>
   );
 }
 

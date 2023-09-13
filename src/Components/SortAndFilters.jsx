@@ -38,25 +38,22 @@ export default function SortAndFilters({
   // function to handle search car by name
   const handleSearchCar = (e) => {
     setSearchedName(e.target.value);
-    // set setSortOrFilterApplied to true
     setSortOrFilterApplied(true);
   };
 
   // function to get sort type and pass it to handleSortedCars
   const getSortType = (sortType) => {
-    // pass sortType to handleSortedCars
     handleSortedCars(sortType);
   };
 
   // function to get filtered cars from database
   const getFilteredCars = async (filterType) => {
     let cars = await axios
-      .get(`https://zoomcar-api-two.vercel.app/get-cars/${filterType}`)
+      .get(`http://localhost:9393/api/v1/car/getCarsByFilter/${filterType}`)
       .then((res) => res.data)
       .catch((err) => "error");
 
     if (cars !== "error") {
-      // send the filtered data to results page
       handleFilteredCars(cars);
     }
   };
@@ -74,41 +71,32 @@ export default function SortAndFilters({
   // reset filter function
   const resetFilters = () => {
     handleFilteredCars("");
-    // set setCurrentSelected to ""
     setCurrentSelected("");
-    // set setCurrentSortType to ""
     setCurrentSortType("");
   };
 
   useEffect(() => {
     const showSearchedName = setTimeout(() => {
-      // console.log(searchedName);
-      // after 1sec pass the name to displaySearchedCar
       displaySearchedCar(searchedName);
     }, 1000);
-
     return () => clearTimeout(showSearchedName);
-  }, [displaySearchedCar]);
+  }, [displaySearchedCar]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // for update using car age slider
   useEffect(() => {
     const carAgeSliderFilteredCars = setTimeout(() => {
-      // after 1sec pass the car_age to filterCarByAgeUsingSlider
       filterCarByAgeUsingSlider(car_age);
     }, 1000);
-
     return () => clearTimeout(carAgeSliderFilteredCars);
-  }, [car_age]);
+  }, [car_age]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // for update using kms run slider
   useEffect(() => {
     const kmsRunSliderFilteredCars = setTimeout(() => {
-      // after 1sec pass the kms_run to filterCarByKmsUsingSlider
       filterCarByKmsUsingSlider(kms_run);
     }, 1000);
-
     return () => clearTimeout(kmsRunSliderFilteredCars);
-  }, [kms_run]);
+  }, [kms_run]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box

@@ -85,22 +85,19 @@ export default function SmallScreenCarCard({
             fontWeight="medium"
             onClick={() => {
               if (isAuth && LoggedInStatusLS) {
-                // addToBooking({ ...carObj });
                 Swal.fire({
                   title: "Do you want to book a car?",
                   text: "You will be redirected to payment gateway",
                   icon: "warning",
                   showDenyButton: true,
-                  // showCancelButton: true,
                   confirmButtonText: "Book now",
                   denyButtonText: `Don't book`,
                 }).then((result) => {
-                  /* Read more about isConfirmed, isDenied below */
                   if (result.isConfirmed) {
-                    // Swal.fire('Saved!', '', 'success')
+                    addToBooking({ ...carObj });
+                    localStorage.setItem("price", discount_price);
                     navigate("/payment");
                   } else if (result.isDenied) {
-                    // Swal.fire('Changes are not saved', '', 'info')
                     navigate("/car");
                   }
                 });

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Flex, Image, Stack } from "@chakra-ui/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"; // Import icons
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import image1 from "../Images/hostimage1.jpg";
 import image2 from "../Images/hostimage2.png";
 import image3 from "../Images/hostimage4.png";
@@ -56,15 +56,13 @@ const Carousel = () => {
               left: "20px",
               backgroundColor: "rgba(0, 0, 0, 0.5)",
               color: "white",
-              padding: "10px", // Increase padding for larger size
-              borderRadius: "50%", // Make it a circle
+              padding: "10px",
+              borderRadius: "50%",
               cursor: "pointer",
               zIndex: 1,
             }}
           >
-            <ChevronLeftIcon
-              boxSize={6} // Increase box size for larger arrow icon
-            />
+            <ChevronLeftIcon boxSize={6} />
           </Button>
           <Button
             onClick={handleNext}
@@ -74,15 +72,13 @@ const Carousel = () => {
               right: "20px",
               backgroundColor: "rgba(0, 0, 0, 0.5)",
               color: "white",
-              padding: "10px", // Increase padding for larger size
-              borderRadius: "50%", // Make it a circle
+              padding: "10px",
+              borderRadius: "50%",
               cursor: "pointer",
               zIndex: 1,
             }}
           >
-            <ChevronRightIcon
-              boxSize={6} // Increase box size for larger arrow icon
-            />
+            <ChevronRightIcon boxSize={6} />
           </Button>
         </Flex>
         <div

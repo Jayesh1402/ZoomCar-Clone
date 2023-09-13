@@ -1,12 +1,10 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContextProvider";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import {
   Box,
   Heading,
-  useDisclosure,
   Flex,
   Spacer,
   Text,
@@ -16,34 +14,28 @@ import {
   Input,
   FormErrorMessage,
   Button,
-  Divider,
-  Center,
 } from "@chakra-ui/react";
-import Navbar from "../Components/Navbar";
-// import {CartContext} from "../../Context/CartContext/CartContext";
 
 function Payment() {
   const [upiId, setUpiId] = useState("");
-  const [isUpiValid, setIsUpiValid] = useState(true); // For UPI validation
+  const [isUpiValid, setIsUpiValid] = useState(true);
 
   // Function to validate UPI ID
   const validateUpiId = () => {
-    // Replace this regex pattern with the one that matches UPI IDs correctly
     const upiPattern = /^[\w.-]+@[a-zA-Z0-9.-]+$/;
 
     return upiPattern.test(upiId);
   };
 
-  const [carData, setCarData] = useState(null);
   const addToPayment = async (carId) => {
     // get token from ls
     let carPayId = localStorage.getItem("id");
     let carPrice = localStorage.getItem("price");
 
     await axios
-      .post("https://mock-data-3aee.onrender.com/bookings", {
-        car_id: carPayId,
-        car_price: carPrice,
+      .post("http://localhost:9393/api/v1/booking/confirmBooking", {
+        bookingId: carPayId,
+        amount: carPrice,
       })
       .then((res) => {
         console.log("success");
@@ -52,7 +44,7 @@ function Payment() {
         console.log(err);
       });
   };
-
+  const navigate = useNavigate();
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,9 +53,7 @@ function Payment() {
     const isValid = validateUpiId();
     setIsUpiValid(isValid);
 
-    // If UPI ID is valid, you can proceed with form submission here
     if (isValid) {
-      // Add your logic to handle form submission
       console.log("UPI ID is valid:", upiId);
       addToPayment();
       Swal.fire({
@@ -71,12 +61,12 @@ function Payment() {
         title: "Payment successful",
         text: "Thanks for choosing ZoomCar",
       });
+      navigate("/car");
     }
   };
 
   return (
     <div>
-      <Navbar />
       <Spacer h="120px" />
 
       <Flex ml="100px" mr="100px">
@@ -166,23 +156,7 @@ function Payment() {
               <Text m="auto">Other UPI</Text>
             </Flex>
             <Text mt="30px">2.Enter UPI/VPA Id</Text>
-            {/* <Input mt="10px" placeholder="Enter UPI ID" required size="lg" />
-            <Button
-              onClick={() => {
-                addToPayment();
-                Swal.fire({
-                  icon: "success",
-                  title: "Payment successful",
-                  text: "Thanks for choosing ZoomCar",
-                });
-              }}
-              w="100%"
-              mt="20px"
-              color="white"
-              bg="#e80071"
-            >
-              {`Verify & Pay Rs.${localStorage.getItem("price")}`}{" "}
-            </Button> */}
+
             <form onSubmit={handleSubmit}>
               <FormControl isInvalid={!isUpiValid}>
                 <FormLabel>UPI ID</FormLabel>

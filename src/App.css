@@ -3,17 +3,13 @@
 }
 
 /* HOME NAVBAR CSS  */
-
-
 .HNavbar.colorChange{
-  background-color: #000000;
-  
+  background-color: #000000;  
 }
-/* CHANGE NAVBAR COLOR CSS */
 
+/* CHANGE NAVBAR COLOR CSS */
 .Navbar{
   background-color: transparent;
-  
 }
 
 .Navbar.colorChange{
@@ -21,16 +17,11 @@
   
 }
 
-
-/* SHOW NOT SHOW NAVBAR CSS */
-
 .nav{
   height:30px;
   width: 100%;
   position:fixed;
   top:0;
-  /* transition-timing-function: ease-in;
-  transition:0.5s */
 }
 
 .nav__show{
@@ -75,7 +66,6 @@
 .ZmsImage{
   width: 100%;
   height: 100%;
-  /* margin-top: 60px; */
 }
 
 .HomeImage{

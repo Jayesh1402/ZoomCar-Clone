@@ -8,15 +8,15 @@ export default function HomePageBox() {
   const [btn1, setBtn1or2] = useState(1);
   const changeBackground = (val) => {
     setBtn1or2(val);
-  }
+  };
 
   return (
     <Flex
-      className={btn1===1 ? Box1Styles.background : Box1Styles.background2}
+      className={btn1 === 1 ? Box1Styles.background : Box1Styles.background2}
       alignItems="flex-end"
       justifyContent="center"
     >
-      <FindCars changeBackground={changeBackground}/>
+      <FindCars changeBackground={changeBackground} />
     </Flex>
   );
 }

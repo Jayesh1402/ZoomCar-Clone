@@ -17,7 +17,6 @@ export default function AuthContextProvider({ children }) {
         password: userCredential.password,
       })
       .then((res) => {
-        // alert("Logged In Successfully");
         Swal.fire({
           icon: "success",
           title: "Logged In",
@@ -26,6 +25,7 @@ export default function AuthContextProvider({ children }) {
         });
         setAuthStatus(true);
         setToken(res.data.token);
+        localStorage.setItem("token", res.data.token);
         let loggedIn = localStorage.getItem("isLoggedIn");
         if (loggedIn === undefined) {
           localStorage.setItem("isLoggedIn", true);
@@ -33,12 +33,19 @@ export default function AuthContextProvider({ children }) {
         localStorage.setItem("isLoggedIn", true);
       })
       .catch((err) => {
-        // alert("invalid email or password");
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Invalid email or password",
-        });
+        if (err.response.status === 403) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Invalid email or password",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "User is Blocked, Contact Admin",
+          });
+        }
         console.log(err);
       });
   };
@@ -51,7 +58,6 @@ export default function AuthContextProvider({ children }) {
         password: userDetails.password,
       })
       .then(() => {
-        // alert("registration successful");
         Swal.fire({
           icon: "success",
           title: "Registration completed",
@@ -66,12 +72,19 @@ export default function AuthContextProvider({ children }) {
         }, 3000);
       })
       .catch((err) => {
-        // alert("registration failed");
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Registration failed",
-        });
+        if (err.response.status === 401) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Email Already Exists, Register using a new Email",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Registration failed",
+          });
+        }
         console.log(err);
       });
   };
@@ -80,6 +93,7 @@ export default function AuthContextProvider({ children }) {
     setAuthStatus(false);
     setToken(null);
     localStorage.setItem("isLoggedIn", false);
+    localStorage.setItem("token", null);
     Swal.fire({
       icon: "success",
       title: "Logged Out",

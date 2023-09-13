@@ -53,13 +53,13 @@ export default function CarCard({
             {name}
           </Text>
           <Text fontSize="15px" opacity="0.5" mb="2">
-            {transmission} {fuel} {seats}
+            {transmission} {fuel} {seats + " Seats"}
           </Text>
           <Text fontSize="15px">
             <span style={{ display: "inline-block" }}>
               <AiFillStar style={{ paddingTop: "1px" }} color="#C77C0C" />
             </span>{" "}
-            {ratings} {kms}
+            {ratings} {kms + "k kms driven"}
           </Text>
         </Box>
         <Box w="15%" h="40px" overflowX="scroll" bg="#f5f5f5">
@@ -97,26 +97,19 @@ export default function CarCard({
               fontWeight="medium"
               onClick={() => {
                 if (isAuth && LoggedInStatusLS) {
-                  // addToBooking({ ...carObj });
                   Swal.fire({
                     title: "Do you want to book a car?",
                     text: "You will be redirected to payment gateway",
                     icon: "warning",
                     showDenyButton: true,
-                    // showCancelButton: true,
                     confirmButtonText: "Book now",
                     denyButtonText: `Don't book`,
                   }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                      // Swal.fire('Saved!', '', 'success')
                       addToBooking({ ...carObj });
                       localStorage.setItem("price", discount_price);
-                      // console.log("id is ", _id);
                       navigate("/payment");
                     } else if (result.isDenied) {
-                      // Swal.fire('Changes are not saved', '', 'info')
-
                       navigate("/car");
                     }
                   });
