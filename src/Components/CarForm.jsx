@@ -86,7 +86,7 @@ const CarForm = () => {
       formData.image = lastUrl;
       formData.userId = decoded.sub;
 
-      await axios.post("http://localhost:9393/api/v1/car/addCar", formData);
+      await axios.post("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/car/addCar", formData);
       // console.log(formData);
 
       // Reset the form

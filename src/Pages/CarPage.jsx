@@ -18,7 +18,7 @@ const addToBooking = async (carId) => {
   var decoded = jwt_decode(token);
   console.log(decoded.sub);
   await axios
-    .post("http://localhost:9393/api/v1/booking/bookCar", {
+    .post("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/booking/bookCar", {
       carId: { ...carId, userId: decoded.sub },
     })
     .then((res) => {
@@ -48,7 +48,7 @@ export default function CarPage() {
   // function to get cars data
   const getAllCars = async () => {
     await axios
-      .get("http://localhost:9393/api/v1/car/getCars", {
+      .get("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/car/getCars", {
         params: {
           startDateTime: "2017-01-13T18:09:42.411",
           endDateTime: "2017-01-14T16:09:42.411",
@@ -66,7 +66,7 @@ export default function CarPage() {
   const displaySearchedCar = async (carName) => {
     if (carName !== "") {
       let data = await axios
-        .get(`http://localhost:9393/api/v1/car/getCarsByName/${carName}`)
+        .get(`http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/car/getCarsByName/${carName}`)
         .then(
           (res) =>
             // update carsArray
@@ -152,7 +152,7 @@ export default function CarPage() {
   const filterCarByAgeUsingSlider = async (carAge) => {
     console.log(carAge);
     let data = await axios
-      .get("http://localhost:9393/api/v1/car/getCars", {
+      .get("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/car/getCars", {
         params: {
           startDateTime: "2017-01-13T18:09:42.411",
           endDateTime: "2017-01-14T16:09:42.411",
@@ -183,7 +183,7 @@ export default function CarPage() {
   const filterCarByKmsUsingSlider = async (kmsRun) => {
     console.log(kmsRun);
     let data = await axios
-      .get("http://localhost:9393/api/v1/car/getCars", {
+      .get("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/car/getCars", {
         params: {
           startDateTime: "2017-01-13T18:09:42.411",
           endDateTime: "2017-01-14T16:09:42.411",

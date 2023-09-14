@@ -1,4 +1,4 @@
-import { Box, Heading, Text, useMediaQuery } from "@chakra-ui/react";
+import { Box, Heading,useMediaQuery } from "@chakra-ui/react";
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
@@ -10,12 +10,13 @@ import jwt_decode from "jwt-decode";
 import SmallScreenCarCard from "../Components/SmallScreenCarCard";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loader from "../Components/Loader";
 
 const getBookingsData = async () => {
   let token = localStorage.getItem("token");
   var decoded = jwt_decode(token);
   return await axios.get(
-    `http://localhost:9393/api/v1/booking/listBookings/${decoded.sub}`
+    `http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/booking/listBookings/${decoded.sub}`
   );
 };
 
@@ -35,7 +36,7 @@ export default function BookingsPage() {
 
   const cancelBooking = async (id) => {
     return await axios
-      .delete(`http://localhost:9393/api/v1/booking/cancelCarBooking/${id}`)
+      .delete(`http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/booking/cancelCarBooking/${id}`)
       .then(() => {
         fetchAndUpdateCarData();
         Swal.fire({
@@ -120,7 +121,7 @@ export default function BookingsPage() {
                   cancelBooking={cancelBooking}
                 />
               ))}
-          {carData.length === 0 ? <Text m="3">No Cars Found..</Text> : null}
+          {carData.length === 0 ? <Loader /> : null}
         </Box>
       </Box>
     </>

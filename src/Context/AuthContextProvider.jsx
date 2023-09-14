@@ -12,7 +12,7 @@ export default function AuthContextProvider({ children }) {
 
   const loginUser = (userCredential) => {
     axios
-      .post("http://localhost:9393/api/v1/auth/authenticate", {
+      .post("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/auth/authenticate", {
         email: userCredential.email,
         password: userCredential.password,
       })
@@ -52,7 +52,7 @@ export default function AuthContextProvider({ children }) {
 
   const registerUser = (userDetails) => {
     axios
-      .post("http://localhost:9393/api/v1/auth/register", {
+      .post("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/auth/register", {
         username: userDetails.username,
         email: userDetails.email,
         password: userDetails.password,

@@ -33,7 +33,7 @@ function Payment() {
     let carPrice = localStorage.getItem("price");
 
     await axios
-      .post("http://localhost:9393/api/v1/booking/confirmBooking", {
+      .post("http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/booking/confirmBooking", {
         bookingId: carPayId,
         amount: carPrice,
       })

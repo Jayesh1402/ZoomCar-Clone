@@ -49,7 +49,7 @@ export default function SortAndFilters({
   // function to get filtered cars from database
   const getFilteredCars = async (filterType) => {
     let cars = await axios
-      .get(`http://localhost:9393/api/v1/car/getCarsByFilter/${filterType}`)
+      .get(`http://ec2-65-2-129-27.ap-south-1.compute.amazonaws.com:9393/api/v1/car/getCarsByFilter/${filterType}`)
       .then((res) => res.data)
       .catch((err) => "error");
 
